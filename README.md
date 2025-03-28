@@ -1,3 +1,6 @@
+[![Go Reference](https://pkg.go.dev/badge/github.com/rifaideen/sse-server.svg)](https://pkg.go.dev/github.com/rifaideen/sse-server)
+[![Go Report Card](https://goreportcard.com/badge/github.com/rifaideen/sse-server)](https://goreportcard.com/report/github.com/rifaideen/sse-server)
+
 # SSE Server
 
 A robust and efficient Server-Sent Events (SSE) server for Go applications.
