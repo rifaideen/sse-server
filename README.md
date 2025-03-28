@@ -16,6 +16,16 @@ The `sse-server` package simplifies the implementation of Server-Sent Events (SS
 - **Graceful Shutdown:** Supports graceful server shutdown.
 - **Buffered Channels:** Uses buffered channels for efficient message handling.
 
+## Concurrency Handling
+
+The `sse-server` package is designed to handle multiple concurrent client connections efficiently and safely. To achieve this, the following concurrency mechanisms are employed:
+
+* **Channels:** Channels are used for communication between goroutines, ensuring safe data transfer.
+* **`sync.Map`:** `sync.Map` is used for concurrent access to the client connection map, minimizing contention.
+* **Race Detection:** The package is regularly tested with the Go race detector (`go test -race`) to identify and prevent race conditions.
+
+Extensive testing has been performed to ensure that the server handles high concurrency scenarios without data races or other concurrency-related issues.
+
 ## Installation
 
 ```sh
