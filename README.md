@@ -40,7 +40,7 @@ func main() {
 
     if err != nil {
         logger.Error("failed to create sse server", "error", err)
-        return 1
+        return
     }
 
     go server.Listen()
@@ -60,10 +60,12 @@ func main() {
 			return
 		}
 
+		// create buffered channel to receive notifications and add it to the server
 		chNotification := make(chan string, 10)
 		server.Add <- chNotification
 
 		defer func() {
+			// remove the channel from the server and close the channel
 			server.Remove <- chNotification
 			close(chNotification)
 		}()
@@ -71,6 +73,12 @@ func main() {
 		for {
 			select {
 			case message := <-chNotification:
+				// Quit signal received, exit the loop
+				if message == sse.QUIT {
+					return
+				}
+
+				// send message to client
 				fmt.Fprintf(w, "data: %s\n\n", message)
 				flusher.Flush()
 			case <-r.Context().Done():
@@ -79,7 +87,8 @@ func main() {
 		}
 	})
 
-    go func() {
+	// Send server time updates every 2 seconds
+	go func() {
 		ticker := time.NewTicker(2 * time.Second)
 		defer ticker.Stop()
 
