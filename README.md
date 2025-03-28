@@ -105,6 +105,10 @@ func main() {
 }
 ```
 
+## Examples
+
+To explore practical examples of using the `sse-server` package, navigate to the `_examples` directory within the package.
+
 ## Feedback
 
 - [Submit feedback](https://github.com/rifaideen/sse-server/issues/new)
